@@ -1,0 +1,19 @@
+services:
+  web:
+    image: odoo:18.0
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./extra-addons:/mnt/extra-addons
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      - POSTGRES_DB=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+      - PGDATA=/var/lib/postgres/data/pgdata
